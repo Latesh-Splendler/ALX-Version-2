@@ -276,9 +276,9 @@ def calculate_risk_score(volatility, profit_margin, historical_yield):
 
 def get_risk_level(score):
     """Get risk level label"""
-    if score <= 40:
+    if score <= 40%:
         return "Low Risk", "🟢"
-    elif score <= 60:
+    elif score <= 60%:
         return "Medium Risk", "🟡"
     else:
         return "High Risk", "🔴"
