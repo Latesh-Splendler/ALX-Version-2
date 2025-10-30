@@ -407,14 +407,14 @@ elif page == "📝 Loan Application":
             farmer_name = st.text_input("Farmer Name *", placeholder="Enter farmer name")
             crop_type = st.selectbox("Crop Type *", ["maize", "beans"], 
                                      format_func=lambda x: "Maize (White)" if x == "maize" else "Beans (Rosecoco)")
-            land_size = st.slider("Land Size (Hectares) *", min_value=1, max_value=50, value=5)
+            land_size = st.slider("Land Size (Hectares) *", min_value=1, max_value=150, value=5)
         
         with col2:
             location = st.selectbox("Location *", 
                                    ["Bungoma", "Eldoret", "Kapsabet", "Kitale", "Nairobi Kangemi"])
             farming_experience = st.slider("Farming Experience (Years) *", min_value=1, max_value=30, value=5)
             historical_yield = st.slider("Historical Yield Performance (%) *", 
-                                        min_value=40, max_value=120, value=80,
+                                        min_value=0, max_value=100, value=60,
                                         help="100% = average yield for the region")
         
         st.divider()
