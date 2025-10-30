@@ -139,8 +139,8 @@ def calculate_features_from_inputs(crop_type, current_price, location='Kitale'):
     
     # Price features (use current price for all price-related features)
     features[f'{crop_type}_avg_price'] = current_price
-    features[f'{crop_type}_retail_avg'] = current_price * 1.1  # Approximate retail markup
-    features[f'{crop_type}_wholesale_avg'] = current_price * 0.9  # Approximate wholesale discount
+    features[f'{crop_type}_retail_avg'] = current_price * 1.1  
+    features[f'{crop_type}_wholesale_avg'] = current_price * 0.9  
     
     # If historical data is available, calculate real lagged features
     if historical_data is not None:
@@ -236,16 +236,16 @@ def predict_loan_amount(crop_type, land_size, historical_yield_pct, current_pric
     
     # Interest rate based on risk
     if risk_score <= 40:
-        interest_rate = 12
+        interest_rate = 17
         approval_status = "Approved"
     elif risk_score <= 60:
-        interest_rate = 15
+        interest_rate = 17
         approval_status = "Approved"
     elif risk_score <= 75:
-        interest_rate = 18
+        interest_rate = 17
         approval_status = "Review Required"
     else:
-        interest_rate = 22
+        interest_rate = 17
         approval_status = "High Risk"
     
     # Calculate repayment
