@@ -21,7 +21,7 @@ warnings.filterwarnings('ignore')
 # ============================================================================
 
 st.set_page_config(
-    page_title="Agricultural Finance ML System",
+    page_title="E-JENGA Finance ML System",
     page_icon="🌾",
     layout="wide",
     initial_sidebar_state="expanded"
