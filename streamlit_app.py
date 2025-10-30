@@ -88,7 +88,8 @@ def load_models():
             'beans_scaler': joblib.load('beans_scaler.pkl'),
             'maize_features': joblib.load('maize_features.pkl'),
             'beans_features': joblib.load('beans_features.pkl'),
-            'crop_params': joblib.load('crop_parameters.pkl')
+            'crop_params': joblib.load('crop_parameters.pkl'),
+            'Kenya_credit': joblib.load('kenya_credit_model.joblib')
           
         }
         return models
