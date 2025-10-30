@@ -1,5 +1,5 @@
 """
-E-Jenga ML System - 
+Agricultural Finance ML System - Streamlit Application
 ======================================================
 A production-ready web application for loan recommendation using trained ML models
 
@@ -21,7 +21,7 @@ warnings.filterwarnings('ignore')
 # ============================================================================
 
 st.set_page_config(
-    page_title="Agricultural Finance ML System",
+    page_title=" Finance ML System",
     page_icon="🌾",
     layout="wide",
     initial_sidebar_state="expanded"
