@@ -21,7 +21,7 @@ warnings.filterwarnings('ignore')
 # ============================================================================
 
 st.set_page_config(
-    page_title=" Agricultural Finance ML System",
+    page_title="Agricultural Finance ML System",
     page_icon="🌾",
     layout="wide",
     initial_sidebar_state="expanded"
@@ -88,9 +88,7 @@ def load_models():
             'beans_scaler': joblib.load('beans_scaler.pkl'),
             'maize_features': joblib.load('maize_features.pkl'),
             'beans_features': joblib.load('beans_features.pkl'),
-            'crop_params': joblib.load('crop_parameters.pkl'),
-            
-          
+            'crop_params': joblib.load('crop_parameters.pkl')
         }
         return models
     except FileNotFoundError:
@@ -139,8 +137,8 @@ def calculate_features_from_inputs(crop_type, current_price, location='Kitale'):
     
     # Price features (use current price for all price-related features)
     features[f'{crop_type}_avg_price'] = current_price
-    features[f'{crop_type}_retail_avg'] = current_price * 1.1  
-    features[f'{crop_type}_wholesale_avg'] = current_price * 0.9  
+    features[f'{crop_type}_retail_avg'] = current_price * 1.1  # Approximate retail markup
+    features[f'{crop_type}_wholesale_avg'] = current_price * 0.9  # Approximate wholesale discount
     
     # If historical data is available, calculate real lagged features
     if historical_data is not None:
@@ -235,17 +233,17 @@ def predict_loan_amount(crop_type, land_size, historical_yield_pct, current_pric
     risk_score = calculate_risk_score(volatility, profit_margin, historical_yield_pct)
     
     # Interest rate based on risk
-    if risk_score <= 30:
-        interest_rate = 16
+    if risk_score <= 40:
+        interest_rate = 12
         approval_status = "Approved"
-    elif risk_score <= 50:
-        interest_rate = 16
+    elif risk_score <= 60:
+        interest_rate = 15
         approval_status = "Approved"
     elif risk_score <= 75:
-        interest_rate = 16
+        interest_rate = 18
         approval_status = "Review Required"
     else:
-        interest_rate = 16
+        interest_rate = 22
         approval_status = "High Risk"
     
     # Calculate repayment
@@ -274,7 +272,7 @@ def calculate_risk_score(volatility, profit_margin, historical_yield):
     score += volatility * 50  # Volatility impact
     score -= min(profit_margin, 50) * 0.3  # Profit margin impact
     score -= (historical_yield - 70) * 0.2  # Historical yield impact
-    return max(25, min(75, score))
+    return max(15, min(95, score))
 
 def get_risk_level(score):
     """Get risk level label"""
@@ -304,7 +302,7 @@ with st.sidebar:
     st.metric("Models Loaded", "2", delta="Maize & Beans")
     if historical_data is not None:
         st.metric("Data Points", f"{len(historical_data)}", delta="20 Years")
-    st.metric("Avg Accuracy", "88%", delta="R² Score")
+    st.metric("Avg Accuracy", "85%", delta="R² Score")
     
     st.divider()
     
@@ -316,7 +314,7 @@ with st.sidebar:
 # ============================================================================
 
 if page == "🏠 Home":
-    st.markdown('<p class="main-header">🌾 E-JENGA Finance ML System</p>', unsafe_allow_html=True)
+    st.markdown('<p class="main-header">🌾 Agricultural Finance ML System</p>', unsafe_allow_html=True)
     st.markdown('<p class="sub-header">AI-Powered Loan Assessment for Kenyan Farmers</p>', unsafe_allow_html=True)
     
     # Key features
@@ -325,7 +323,7 @@ if page == "🏠 Home":
     with col1:
         st.metric(
             label="Model Accuracy",
-            value="88%",
+            value="85%",
             delta="R² Score"
         )
     
@@ -359,9 +357,9 @@ if page == "🏠 Home":
     and provide data-driven recommendations for agricultural financing.
     
     **Key Features:**
-    - 🤖 **AI-Powered Predictions**: Random Forest ML model with 88% accuracy
+    - 🤖 **AI-Powered Predictions**: Random Forest ML model with 85% accuracy
     - 📊 **Risk Assessment**: Comprehensive risk scoring based on market volatility
-    - 💰 **Smart Recommendations**: Optimal loan amounts based on profitability analysis 
+    - 💰 **Smart Recommendations**: Optimal loan amounts based on profitability analysis
     - 📈 **Market Analysis**: Real-time insights from 20 years of price data
     - ⚡ **Instant Results**: Get loan recommendations in under 1 second
     """)
@@ -407,14 +405,14 @@ elif page == "📝 Loan Application":
             farmer_name = st.text_input("Farmer Name *", placeholder="Enter farmer name")
             crop_type = st.selectbox("Crop Type *", ["maize", "beans"], 
                                      format_func=lambda x: "Maize (White)" if x == "maize" else "Beans (Rosecoco)")
-            land_size = st.slider("Land Size (Hectares) *", min_value=1, max_value=80, value=15)
+            land_size = st.slider("Land Size (Hectares) *", min_value=1, max_value=50, value=5)
         
         with col2:
             location = st.selectbox("Location *", 
                                    ["Bungoma", "Eldoret", "Kapsabet", "Kitale", "Nairobi Kangemi"])
             farming_experience = st.slider("Farming Experience (Years) *", min_value=1, max_value=30, value=5)
-            historical_yield = st.slider("Historical Yield Performance (Kg) *", 
-                                        min_value=10, max_value=1500, value=500,
+            historical_yield = st.slider("Historical Yield Performance (%) *", 
+                                        min_value=40, max_value=120, value=80,
                                         help="100% = average yield for the region")
         
         st.divider()
@@ -564,7 +562,7 @@ elif page == "📝 Loan Application":
                 
                 loan_details = {
                     'Detail': ['Principal Amount', 'Interest Rate', 'Total Repayment', 
-                               'Repayment Period', 'Loan per Hectare'],
+                              'Monthly Payment', 'Repayment Period', 'Loan per Hectare'],
                     'Value': [
                         f"KES {result['recommended_loan']:,.0f}",
                         f"{result['interest_rate']}% per annum",
@@ -778,7 +776,7 @@ elif page == "ℹ️ About":
         - **Training Data:** 20 years (2005-2025)
         - **Features:** 17 engineered features
         - **Target Variable:** Optimal loan amount
-        - **Accuracy:** ~88% (R² Score)
+        - **Accuracy:** ~85% (R² Score)
         - **MAE:** ±KES 4,000-5,000
         """)
     
