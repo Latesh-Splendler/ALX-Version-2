@@ -278,9 +278,9 @@ def calculate_risk_score(volatility, profit_margin, historical_yield):
 
 def get_risk_level(score):
     """Get risk level label"""
-    if score <= 30:
+    if score <= 40:
         return "Low Risk", "🟢"
-    elif score <= 50:
+    elif score <= 60:
         return "Medium Risk", "🟡"
     else:
         return "High Risk", "🔴"
@@ -304,7 +304,7 @@ with st.sidebar:
     st.metric("Models Loaded", "2", delta="Maize & Beans")
     if historical_data is not None:
         st.metric("Data Points", f"{len(historical_data)}", delta="20 Years")
-    st.metric("Avg Accuracy", "85%", delta="R² Score")
+    st.metric("Avg Accuracy", "88%", delta="R² Score")
     
     st.divider()
     
@@ -407,7 +407,7 @@ elif page == "📝 Loan Application":
             farmer_name = st.text_input("Farmer Name *", placeholder="Enter farmer name")
             crop_type = st.selectbox("Crop Type *", ["maize", "beans"], 
                                      format_func=lambda x: "Maize (White)" if x == "maize" else "Beans (Rosecoco)")
-            land_size = st.slider("Land Size (Hectares) *", min_value=1, max_value=150, value=5)
+            land_size = st.slider("Land Size (Hectares) *", min_value=1, max_value=80, value=15)
         
         with col2:
             location = st.selectbox("Location *", 
@@ -564,7 +564,7 @@ elif page == "📝 Loan Application":
                 
                 loan_details = {
                     'Detail': ['Principal Amount', 'Interest Rate', 'Total Repayment', 
-                              'Monthly Payment', 'Repayment Period', 'Loan per Hectare'],
+                               'Repayment Period', 'Loan per Hectare'],
                     'Value': [
                         f"KES {result['recommended_loan']:,.0f}",
                         f"{result['interest_rate']}% per annum",
