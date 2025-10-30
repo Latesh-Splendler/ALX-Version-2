@@ -235,10 +235,10 @@ def predict_loan_amount(crop_type, land_size, historical_yield_pct, current_pric
     risk_score = calculate_risk_score(volatility, profit_margin, historical_yield_pct)
     
     # Interest rate based on risk
-    if risk_score <= 40:
+    if risk_score <= 30:
         interest_rate = 16
         approval_status = "Approved"
-    elif risk_score <= 60:
+    elif risk_score <= 50:
         interest_rate = 16
         approval_status = "Approved"
     elif risk_score <= 75:
@@ -274,13 +274,13 @@ def calculate_risk_score(volatility, profit_margin, historical_yield):
     score += volatility * 50  # Volatility impact
     score -= min(profit_margin, 50) * 0.3  # Profit margin impact
     score -= (historical_yield - 70) * 0.2  # Historical yield impact
-    return max(15, min(95, score))
+    return max(25, min(75, score))
 
 def get_risk_level(score):
     """Get risk level label"""
-    if score <= 40:
+    if score <= 30:
         return "Low Risk", "🟢"
-    elif score <= 60:
+    elif score <= 50:
         return "Medium Risk", "🟡"
     else:
         return "High Risk", "🔴"
