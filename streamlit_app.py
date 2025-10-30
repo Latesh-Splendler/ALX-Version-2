@@ -21,7 +21,7 @@ warnings.filterwarnings('ignore')
 # ============================================================================
 
 st.set_page_config(
-    page_title="E-JENGA Finance ML System",
+    page_title="Agricultural Finance ML System",
     page_icon="🌾",
     layout="wide",
     initial_sidebar_state="expanded"
@@ -234,16 +234,16 @@ def predict_loan_amount(crop_type, land_size, historical_yield_pct, current_pric
     
     # Interest rate based on risk
     if risk_score <= 40:
-        interest_rate = 12
+        interest_rate = 15
         approval_status = "Approved"
     elif risk_score <= 60:
         interest_rate = 15
         approval_status = "Approved"
     elif risk_score <= 75:
-        interest_rate = 18
+        interest_rate = 15
         approval_status = "Review Required"
     else:
-        interest_rate = 22
+        interest_rate = 25
         approval_status = "High Risk"
     
     # Calculate repayment
@@ -302,11 +302,11 @@ with st.sidebar:
     st.metric("Models Loaded", "2", delta="Maize & Beans")
     if historical_data is not None:
         st.metric("Data Points", f"{len(historical_data)}", delta="20 Years")
-    st.metric("Avg Accuracy", "85%", delta="R² Score")
+    st.metric("Avg Accuracy", "86%", delta="R² Score")
     
     st.divider()
     
-    st.caption("🌾 Agricultural Finance ML System v1.0")
+    st.caption("🌾 E-JENGA Finance ML System v1.0")
     st.caption("Powered by Random Forest ML")
 
 # ============================================================================
@@ -323,7 +323,7 @@ if page == "🏠 Home":
     with col1:
         st.metric(
             label="Model Accuracy",
-            value="85%",
+            value="86%",
             delta="R² Score"
         )
     
@@ -412,7 +412,7 @@ elif page == "📝 Loan Application":
                                    ["Bungoma", "Eldoret", "Kapsabet", "Kitale", "Nairobi Kangemi"])
             farming_experience = st.slider("Farming Experience (Years) *", min_value=1, max_value=30, value=5)
             historical_yield = st.slider("Historical Yield Performance (%) *", 
-                                        min_value=40, max_value=120, value=80,
+                                        min_value=10, max_value=100, value=55,
                                         help="100% = average yield for the region")
         
         st.divider()
