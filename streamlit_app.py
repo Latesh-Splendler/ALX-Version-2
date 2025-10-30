@@ -314,7 +314,7 @@ with st.sidebar:
 # ============================================================================
 
 if page == "🏠 Home":
-    st.markdown('<p class="main-header">🌾 Agricultural Finance ML System</p>', unsafe_allow_html=True)
+    st.markdown('<p class="main-header">🌾 E-JENGA Finance ML System</p>', unsafe_allow_html=True)
     st.markdown('<p class="sub-header">AI-Powered Loan Assessment for Kenyan Farmers</p>', unsafe_allow_html=True)
     
     # Key features
