@@ -236,16 +236,16 @@ def predict_loan_amount(crop_type, land_size, historical_yield_pct, current_pric
     
     # Interest rate based on risk
     if risk_score <= 40:
-        interest_rate = 17
+        interest_rate = 16
         approval_status = "Approved"
     elif risk_score <= 60:
-        interest_rate = 17
+        interest_rate = 16
         approval_status = "Approved"
     elif risk_score <= 75:
-        interest_rate = 17
+        interest_rate = 16
         approval_status = "Review Required"
     else:
-        interest_rate = 17
+        interest_rate = 16
         approval_status = "High Risk"
     
     # Calculate repayment
@@ -325,7 +325,7 @@ if page == "🏠 Home":
     with col1:
         st.metric(
             label="Model Accuracy",
-            value="85%",
+            value="88%",
             delta="R² Score"
         )
     
@@ -359,9 +359,9 @@ if page == "🏠 Home":
     and provide data-driven recommendations for agricultural financing.
     
     **Key Features:**
-    - 🤖 **AI-Powered Predictions**: Random Forest ML model with 85% accuracy
+    - 🤖 **AI-Powered Predictions**: Random Forest ML model with 88% accuracy
     - 📊 **Risk Assessment**: Comprehensive risk scoring based on market volatility
-    - 💰 **Smart Recommendations**: Optimal loan amounts based on profitability analysis
+    - 💰 **Smart Recommendations**: Optimal loan amounts based on profitability analysis 
     - 📈 **Market Analysis**: Real-time insights from 20 years of price data
     - ⚡ **Instant Results**: Get loan recommendations in under 1 second
     """)
@@ -778,7 +778,7 @@ elif page == "ℹ️ About":
         - **Training Data:** 20 years (2005-2025)
         - **Features:** 17 engineered features
         - **Target Variable:** Optimal loan amount
-        - **Accuracy:** ~85% (R² Score)
+        - **Accuracy:** ~88% (R² Score)
         - **MAE:** ±KES 4,000-5,000
         """)
     
